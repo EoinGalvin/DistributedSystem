@@ -1,0 +1,10 @@
+static final String endMessage = "807";
+   static final String downloadMessage = "808";
+   static final String loginMessage = "801";
+    static final String logoutMessage = "802";
+   static final String loginSuccessMessage = "803";
+    static final String loginFailMessage = "804";
+    static final String logoutSuccessMessage = "805";
+    static final String logoutFailMessage = "806";
+
+    static final String isLoggedInMessage = "809";
