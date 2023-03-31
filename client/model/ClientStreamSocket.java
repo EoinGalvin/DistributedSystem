@@ -8,8 +8,6 @@ import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ClientStreamSocket extends Socket {
    private SSLSocket  socket;
@@ -18,7 +16,9 @@ public class ClientStreamSocket extends Socket {
 
    ClientStreamSocket(InetAddress acceptorHost, int acceptorPort ) throws SocketException, IOException{
       try{
-         System.setProperty("javax.net.ssl.trustStore", "C:\\PeterProject\\client\\model\\public.jks");
+         String trustStoreLocationAsString = System.getProperty("user.dir") + "\\client\\model\\public.jks";
+
+         System.setProperty("javax.net.ssl.trustStore", trustStoreLocationAsString);
          System.setProperty( "javax.net.ssl.trustStorePassword", "password");
 
          SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();

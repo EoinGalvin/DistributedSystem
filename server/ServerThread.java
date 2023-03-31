@@ -15,8 +15,6 @@ class ServerThread implements Runnable {
     static final String isLoggedInFalse = "811";
     static final String messageReceivedTrue = "812";
     static final String disconnectSuccess = "813";
-
-
     String username = null;
     String password = null;
     boolean loggedIn = false;
@@ -58,20 +56,19 @@ class ServerThread implements Runnable {
 
        if(this.password != null && this.username != null){
            if(!this.server.getUserLogins().containsKey(this.username)){
-               System.out.println("invalid username");
+               System.out.println("LOGIN FAILED: Invalid Username Provided");
                myDataSocket.sendMessage(loginFailMessage);
            }
            else{
                if(this.server.getUserLogins().get(this.username).equals(this.password)){
-                   System.out.println("User: " + this.username + " is now logged in");
+                   System.out.println("USER LOGGED IN : " + this.username);
                    this.server.userLoggedIn(this.username);
                    this.loggedIn = true;
                    myDataSocket.sendMessage(loginSuccessMessage);
-
                    System.out.println("USERS CONNECTED : " + String.join(", ", server.getUsers()));
                }
                else{
-                   System.out.println("Invalid password");
+                   System.out.println("LOGIN FAILED: Incorrect Password Provided");
                    myDataSocket.sendMessage(loginFailMessage);
                }
            }
@@ -95,10 +92,12 @@ class ServerThread implements Runnable {
        }
    }
    private void downloadMessagesRequest(){
+       System.out.println("Download Messages Request Received");
        System.out.println("Sending all messages : " + String.join(", ", server.getMessages()));
        myDataSocket.sendMessage(String.join(", ", server.getMessages()));
    }
    private void isLoggedInRequest(){
+       System.out.println("Logged In Query Received");
        if(loggedIn){
            myDataSocket.sendMessage(isLoggedInTrue);
        }else{
@@ -106,12 +105,12 @@ class ServerThread implements Runnable {
        }
    }
    private void messageReceived(String message){
-       System.out.println("message received: "+ message);
+       System.out.println("MESSAGE RECEIVED: "+ message);
        server.addMessage(message);
        myDataSocket.sendMessage(messageReceivedTrue);
    }
    private void endSession() throws IOException {
-       System.out.println("Session over. Thread Closed. Socket Closed.");
+       System.out.println("SESSION TERMINATED");
        myDataSocket.sendMessage(disconnectSuccess);
        myDataSocket.close( );
        Thread.currentThread().interrupt();

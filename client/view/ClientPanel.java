@@ -157,17 +157,19 @@ public class ClientPanel extends JPanel {
         return isLoggedIn;
     }
     private void sendMessage(){
-        if(isUserLoggedIn()){
-            System.out.println("Message sent : " + messageField.getText());
-            String returned = controller.sendMessage(messageField.getText());
+            if(isUserLoggedIn()){
+                if(messageField.getText().equals("")){
+                    errorText.setText("You cannot send an empty message to the server");
+                }else{
+                    System.out.println("Message sent : " + messageField.getText());
+                    String returned = controller.sendMessage(messageField.getText());
 
-            if(returned.equals(messageReceivedTrue)){
-                errorText.setText("Message Received");
-            }else{
-                errorText.setText("Message Not Received");
+                    if(returned.equals(messageReceivedTrue)){
+                        errorText.setText("Message Received");
+                    }else{
+                        errorText.setText("Message Not Received");
+                    }
+                }
             }
-
-        }
-
     }
 }
