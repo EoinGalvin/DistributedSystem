@@ -11,7 +11,7 @@ public class Server {
     private static ArrayList<String> users = new ArrayList<>();
     private static HashMap<String,String> userLogins = new HashMap<>();
     public void runServer(){
-        String ksName = "C:\\PeterProject\\server\\herong.jks";
+        String ksName = System.getProperty("user.dir") +"\\server\\herong.jks";
         char[] ksPass = "password".toCharArray();
         char[] ctPass = "password".toCharArray();
 

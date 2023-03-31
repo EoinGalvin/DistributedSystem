@@ -39,7 +39,6 @@ public class ClientHelper {
       mySocket.sendMessage(loginMessage);
       mySocket.sendMessage(username);
       mySocket.sendMessage(password);
-      mySocket.s
 
       return mySocket.receiveMessage();
    }
