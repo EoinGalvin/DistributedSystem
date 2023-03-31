@@ -11,9 +11,7 @@ public class Server {
     private static ArrayList<String> users = new ArrayList<>();
     private static HashMap<String,String> userLogins = new HashMap<>();
     public void runServer(){
-        String ksName = System.getProperty("user.dir") +"\\server\\herong.jks";
-        System.out.println("user directory");
-        System.out.println(System.getProperty("user.dir"));
+        String ksName = "C:\\PeterProject\\server\\herong.jks";
         char[] ksPass = "password".toCharArray();
         char[] ctPass = "password".toCharArray();
 
@@ -47,6 +45,7 @@ public class Server {
 
            System.out.println("Echo server ready");
            while (true) {
+               System.out.println("Waiting for a connection");
                ServerStreamSocket myDataSocket = new ServerStreamSocket((SSLSocket) sslServerSocket.accept());
                System.out.println("connection accepted");
 
